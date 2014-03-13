@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../inc/studentinfo_test.h"
+#include "../inc/student.h"
 
 #define DETAILS        1
 #define UNIT_MARKS     2
