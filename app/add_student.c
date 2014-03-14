@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../inc/student.h"
 
-#define PATH /home/jeevitha/schooldb_03_12_2014/app/studentinfo.dbs
+#define STUDENT_INFORMATION "/home/jeevitha/schooldb_03_12_2014/app/studentinfo.dbs"
 
 schooldb_error_t
 db_add_student (student_t *s)
@@ -9,7 +9,7 @@ db_add_student (student_t *s)
     FILE *my_stream;
     int written_bytes;
 
-    my_stream = fopen("/home/jeevitha/schooldb_03_12_2014/app/studentinfo.dbs", "a+");
+    my_stream = fopen(STUDENT_INFORMATION, "a+");
     if (my_stream == NULL) {
         printf("Error in opening file\n");
         return -1;
