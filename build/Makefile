@@ -10,7 +10,7 @@ CFLAGS=-g -c -Wall
 all: studentdb 
 
 studentdb: ui.o db.o 
-	$(CC)  ui.o -o studentdb
+	$(CC)  ui.o db.o -o studentdb
 
 ui.o: $(SRC)/ui.c
 	$(CC) $(CFLAGS) $(SRC)/ui.c

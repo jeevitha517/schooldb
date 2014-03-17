@@ -2,6 +2,7 @@
 #define __DB_H__
 
 #include "error.h"
+
 extern schooldb_error_t
 db_add_student(student_t *s);
 
