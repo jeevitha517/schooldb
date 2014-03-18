@@ -4,6 +4,7 @@
 #include "../inc/student.h"
 #include "../inc/ui.h"
 #include "../inc/error.h"
+#include "../inc/db.h"
 
 static void
 ui_main_menu(void)
@@ -74,22 +75,41 @@ main()
     int exitFlag = false;
     schooldb_error_t err;
     student_t student;
+    char sname[NAME_SIZE];
+    char tmp[5];
+
+    memset(&student, 0, sizeof(student));
 
     while(exitFlag == false) {
         printf("\n\n");
         ui_main_menu();
         switch(ui_get_main_option()) {
             case UI_GETSTUDENT_INFO:
-                memset(&student, 0, sizeof(student));
                 err = ui_read_student_admmission_info(&student);
                 if (err != SCHOOLDB_ERROR_NONE) {
                     printf("Incorrect details entered for student during admission, %d", err);
                     break;
                 }
 
+                err = db_add_student(&student);
+                if (err != SCHOOLDB_ERROR_NONE) {
+                    printf("Error Adding student to database, %d\n", err);
+                }
+
                 break;
 
             case UI_LOOKUP_STUDENT:
+                memset(sname, 0, sizeof(sname));
+                printf("Enter Student name to find : ");
+                scanf("%s", sname);
+                gets(tmp);
+                err = db_get_student(sname, &student);
+                if (err == SCHOOLDB_ERROR_NONE) {
+                    printf("Student %s details found in database\n", sname);
+                } else {
+                    printf("Student %s details NOT found in database\n", sname);
+                }
+                    
                 break;
 
             case UI_PRINT_ALL_STUDENTS:
